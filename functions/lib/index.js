@@ -4,8 +4,8 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const functions = require("firebase-functions");
-var router = require('./routes/index')();
-var app = express();
+const router = require('../src/routes/index');
+const app = express();
 // view engine setup
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
@@ -14,9 +14,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'apidoc')));
 app.use(cors());
-app.use('/', () => {
+app.use('/', (req, res, next) => {
     // // console.log();
-    // next();
+    next();
 }, router);
 // app.use(function (err, req, res, next) {
 //   res.locals.message = err.message;
@@ -24,7 +24,7 @@ app.use('/', () => {
 //   res.status(err.status || 500);
 //   res.render('error', { err: err });
 // });
-exports.pelada = functions.https.onRequest(app);
+exports.panelinha = functions.https.onRequest(app);
 // export const pelada = functions.https.onRequest((request, response) => {
 //   response.send("HelloWorld Pelada App");
 // });

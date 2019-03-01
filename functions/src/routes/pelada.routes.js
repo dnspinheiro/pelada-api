@@ -1,4 +1,4 @@
-import * as express from 'express';
+const express = require("express");
 const router = express.Router();
 const pelada_controller = require('../controllers/pelada.controller')();
 
