@@ -1,8 +1,10 @@
 ## Compiled JavaScript files
-**/*.js
-**/*.js.map
 
-# Typescript v1 declaration files
-typings/
-
+# Dependency directories
 node_modules/
+
+# Untracked files:
+functions/package-lock.json
+functions/firebase-debug.log
+
+functions/firebase-debug\.log
