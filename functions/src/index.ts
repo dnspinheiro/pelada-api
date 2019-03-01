@@ -1,9 +1,10 @@
+import createError = require('http-errors');
 import express = require('express');
 import path = require('path');
 import cors = require('cors');
 import functions = require('firebase-functions');
 
-const  router = require('../src/routes/index');
+const router = require('../src/routes/index');
 
 const app = express();
 
@@ -17,19 +18,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'apidoc')));
 app.use(cors());
 app.use('/', (req, res, next) => {
-  // // console.log();
   next();
 }, router);
 
-// app.use(function (err, req, res, next) {
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (req, res, next) {
+  next(createError(404, "Caminho não encontrado!"));
+});
 
-//   res.status(err.status || 500);
-//   res.render('error', { err: err });
-// });
+
 
 export const panelinha = functions.https.onRequest(app);
-// export const pelada = functions.https.onRequest((request, response) => {
-//   response.send("HelloWorld Pelada App");
-// });

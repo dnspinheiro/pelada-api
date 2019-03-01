@@ -16,7 +16,18 @@ PeladaRepository.prototype.get = function () {
         });
         return array;
     });
-    // return [];
+};
+
+PeladaRepository.prototype.post = function () {
+    return db.collection('Peladas/').get().then(snapshot => {
+        var array = [];
+        snapshot.forEach((doc) => {
+            var obj = doc.data();
+            obj.id = doc.id;
+            array.push(obj);
+        });
+        return array;
+    });
 };
 
 module.exports = function () {
