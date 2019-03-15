@@ -25,7 +25,7 @@ PeladaController.prototype.post = function (req, res, next) {
     let pelada = req.body;
 
     repository.post(pelada).then((retorno) => {
-        return response.success(res, "Pelada criada com sucesso!", retorno);
+        return response.success(res, "Pelada criada com sucesso!", []);
     }).catch(error => {
         console.log('error - inserir pelada', error);
         return response.error(res, "Erro ao criar pelada!");
@@ -38,7 +38,7 @@ PeladaController.prototype.alterar = function (req, res, next) {
     repository.getById(req.params.id).then((obj) => {
         if (obj) {
             repository.update(req.params.id, req.body).then(retorno => {
-                return response.success(res, "Pelada atualizada com sucesso!", retorno);
+                return response.success(res, "Pelada atualizada com sucesso!", []);
             }).catch(error => {
                 return response.error(res, "Erro ao atualizar pelada!");
             });
@@ -71,7 +71,7 @@ PeladaController.prototype.delete = function (req, res, next) {
     var id_pelada = req.params.id;
 
     repository.delete(id_pelada).then((array) => {
-        return response.success(res, "Pelada excluída com sucesso!", array);
+        return response.success(res, "Pelada excluída com sucesso!", []);
     }).catch(error => {
         console.log('error - excluir pelada', error);
         return response.error(res, "Erro ao excluir pelada! ");

@@ -25,7 +25,7 @@ EstatisticaController.prototype.post = function (req, res, next) {
     let estatistica = req.body;
 
     repository.post(estatistica).then((retorno) => {
-        return response.success(res, "Estatistica criada com sucesso!", retorno);
+        return response.success(res, "Estatistica criada com sucesso!", []);
     }).catch(error => {
         console.log('error - inserir Estatistica', error);
         return response.error(res, "Erro ao criar Estatistica!");
@@ -38,7 +38,7 @@ EstatisticaController.prototype.alterar = function (req, res, next) {
     repository.getById(req.params.id).then((obj) => {
         if (obj) {
             repository.update(req.params.id, req.body).then(retorno => {
-                return response.success(res, "Estatistica atualizada com sucesso!", retorno);
+                return response.success(res, "Estatistica atualizada com sucesso!", []);
             }).catch(error => {
                 return response.error(res, "Erro ao atualizar Estatistica!");
             });
@@ -71,7 +71,7 @@ EstatisticaController.prototype.delete = function (req, res, next) {
     var id_estatistica = req.params.id;
 
     repository.delete(id_estatistica).then((array) => {
-        return response.success(res, "Estatistica excluída com sucesso!", array);
+        return response.success(res, "Estatistica excluída com sucesso!", []);
     }).catch(error => {
         console.log('error - excluir Estatistica', error);
         return response.error(res, "Erro ao excluir Estatistica! ");

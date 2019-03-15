@@ -31,6 +31,28 @@ PeladaRepository.prototype.getById = function (id) {
 };
 
 PeladaRepository.prototype.post = function (pelada) {
+    var fcm = firebase.messaging();
+    var message = {
+        android: {
+            ttl: 3600 * 1000,
+            notification: {
+                title: "Vai perder?",
+                body: "Foi criado uma pelada dos " + pelada.nome + " para " + pelada.hora,
+                color: '#95b700',
+            }
+        },
+        topic: "/topics/all",
+    };
+
+    fcm.send(message)
+        .then((response) => {
+            // Response is a message ID string.
+            console.log('Successfully sent message:', response);
+        })
+        .catch((error) => {
+            console.log('Error sending message:', error);
+        });
+
     return db.collection('Pelada/').doc().set(pelada);
 };
 
